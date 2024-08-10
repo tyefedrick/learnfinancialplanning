@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Learnfinancialplanning</title>
+    <title>Learn Financial Planning</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -21,6 +21,9 @@
         </div>
         <!-- Always visible login/logout buttons -->
         <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <%= link_to "CFP® Test Prep", cfp_home_path, class: "nav-link" %>
+          </li>
           <% if user_signed_in? %>
             <li class="nav-item">
               <%= link_to "Account", edit_user_registration_path, class: "nav-link" %>
@@ -42,40 +45,47 @@
 
     <div class="container-fluid">
       <div class="row">
-        <!-- Navbar for smaller screens -->
-        <nav class="navbar navbar-light bg-light d-md-none">
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </nav>
+        <% if controller_name == 'cfp' %>
+          <!-- Navbar for smaller screens -->
+          <nav class="navbar navbar-light bg-light d-md-none">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </nav>
 
-        <!-- Offcanvas Sidebar for smaller screens -->
-        <div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasSidebarLabel">CFP® Test Prep</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <!-- Offcanvas Sidebar for smaller screens -->
+          <div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasSidebarLabel">CFP® Test Prep</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <!-- Include the CFP® Test Prep nav items here -->
+              <%= render 'shared/nav_items' %>
+            </div>
           </div>
-          <div class="offcanvas-body">
-            <!-- Include the same nav items here -->
-            <%= render 'shared/nav_items' %>
-          </div>
-        </div>
 
-        <!-- Sidebar for larger screens -->
-        <nav class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
-          <div class="position-sticky">
-            <!-- Include the same nav items here -->
-            <%= render 'shared/nav_items' %>
-          </div>
-        </nav>
+          <!-- Sidebar for larger screens -->
+          <nav class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
+            <div class="position-sticky">
+              <!-- Include the CFP® Test Prep nav items here -->
+              <%= render 'shared/nav_items' %>
+            </div>
+          </nav>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <%= yield %>
-        </main>
+          <!-- Adjusted main content area when sidebar is present -->
+          <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <%= yield %>
+          </main>
+        <% else %>
+          <!-- Full-width main content area when sidebar is absent -->
+          <main class="col-12 px-md-4">
+            <%= yield %>
+          </main>
+        <% end %>
       </div>
     </div>
 
     <%= vite_javascript_tag 'application' %>
   </body>
 </html>
-
