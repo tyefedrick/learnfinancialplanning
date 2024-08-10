@@ -3,6 +3,9 @@ import "@hotwired/turbo-rails"
 import { Application } from "@hotwired/stimulus"
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap'
+// Import Rails UJS for handling links and forms with special methods like DELETE
+import Rails from "@rails/ujs";
+Rails.start();
 
 const application = Application.start()
 
